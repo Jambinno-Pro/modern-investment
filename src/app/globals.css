@@ -1,26 +1,429 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --brand-orange: #f58200;
+  --brand-blue: #168be8;
+  --brand-navy: #101b78;
+  --brand-white: #ffffff;
+  --brand-light: #f5f7fa;
+  --text-dark: #202632;
+  --text-muted: #697386;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+* {
+  box-sizing: border-box;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
+  margin: 0;
+  background: var(--brand-white);
+  color: var(--text-dark);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+::selection {
+  background: var(--brand-orange);
+  color: white;
+}
+
+.container {
+  width: min(1200px, calc(100% - 48px));
+  margin-inline: auto;
+}
+
+.section-padding {
+  padding: 100px 0;
+}
+
+.section-label {
+  color: var(--brand-orange);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+}
+
+.section-title {
+  color: var(--brand-navy);
+  font-size: clamp(30px, 4vw, 46px);
+  font-weight: 800;
+  line-height: 1.15;
+}
+
+.orange-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 15px 25px;
+  border: 1px solid var(--brand-orange);
+  border-radius: 5px;
+  background: var(--brand-orange);
+  color: white;
+  font-size: 14px;
+  font-weight: 700;
+  transition: all 0.3s ease;
+}
+
+.orange-button:hover {
+  border-color: var(--brand-navy);
+  background: var(--brand-navy);
+  transform: translateY(-2px);
+}
+
+.outline-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 14px 25px;
+  border: 1px solid white;
+  border-radius: 5px;
+  color: white;
+  font-size: 14px;
+  font-weight: 700;
+  transition: all 0.3s ease;
+}
+
+.outline-button:hover {
+  background: white;
+  color: var(--brand-navy);
+}
+
+@media (max-width: 768px) {
+  .container {
+    width: calc(100% - 36px);
+  }
+
+  .section-padding {
+    padding: 65px 0;
+  }
+}
+
+/*Hero Silder*/
+
+@keyframes heroFade {
+  from {
+    opacity: 0;
+    transform: scale(1.025);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes heroContent {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-hero-fade {
+  animation: heroFade 900ms ease both;
+}
+
+.animate-hero-content {
+  animation: heroContent 700ms ease both;
+}
+
+/*edted css/*
+
+
+/* =========================================
+   MODERN INVESTMENTS - HERO SLIDER
+========================================= */
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-manrope), Arial, sans-serif;
+}
+
+.hero-slider {
+  isolation: isolate;
+}
+
+.hero-background-image {
+  animation: heroImageZoom 7s ease-out both;
+}
+
+.hero-content {
+  animation: heroContentReveal 850ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+@keyframes heroImageZoom {
+  from {
+    transform: scale(1.07);
+  }
+
+  to {
+    transform: scale(1);
+  }
+}
+
+@keyframes heroContentReveal {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-background-image,
+  .hero-content {
+    animation: none;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* =========================================
+   MODERN HERO BUTTON
+========================================= */
+
+.hero-quote-button {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 20px;
+  min-height: 62px;
+  padding: 7px 9px 7px 27px;
+  overflow: hidden;
+  border-radius: 3px;
+  background: linear-gradient(110deg, #f58200, #ff9d24);
+  color: #ffffff;
+  font-family: var(--font-manrope), Arial, sans-serif;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  box-shadow: 0 8px 24px rgba(245, 130, 0, 0.18);
+  transition:
+    transform 350ms ease,
+    box-shadow 350ms ease,
+    background 350ms ease,
+    color 350ms ease;
+}
+
+.hero-quote-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 28px rgba(245, 130, 0, 0.3);
+  background: linear-gradient(110deg, #ffffff, #f3f5fa);
+  color: #101b78;
+}
+
+.hero-quote-arrow {
+  display: flex;
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.2);
+  transition:
+    background 350ms ease,
+    color 350ms ease,
+    transform 350ms ease;
+}
+
+.hero-quote-button:hover .hero-quote-arrow {
+  background: #f58200;
+  color: #ffffff;
+  transform: translateX(3px);
+}
+
+/* =========================================
+   ANIMATED VERTICAL LIGHT LINES
+========================================= */
+
+.hero-light-lines {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.hero-light-line {
+  position: absolute;
+  top: 0;
+  width: 1px;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+/* Small travelling light beam */
+
+.hero-light-line::after {
+  content: "";
+  position: absolute;
+  left: -1px;
+  width: 3px;
+  height: 28px;
+  border-radius: 50%;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(255, 255, 255, 0.65),
+    #f58200,
+    #ffffff,
+    transparent
+  );
+  box-shadow:
+    0 0 4px rgba(245, 130, 0, 0.4),
+    0 0 8px rgba(255, 255, 255, 0.18);
+}
+
+/* Downward travelling lights */
+
+.hero-light-line.light-down::after {
+  top: -35px;
+  animation: lightMovingDown 6s linear infinite;
+}
+
+/* Upward travelling lights */
+
+.hero-light-line.light-up::after {
+  top: calc(100% + 35px);
+  animation: lightMovingUp 6s linear infinite;
+}
+
+/* Down animation */
+
+@keyframes lightMovingDown {
+  0% {
+    top: -35px;
+    opacity: 0;
+  }
+
+  15% {
+    opacity: 0.85;
+  }
+
+  85% {
+    opacity: 0.85;
+  }
+
+  100% {
+    top: calc(100% + 35px);
+    opacity: 0;
+  }
+}
+
+/* Up animation */
+
+@keyframes lightMovingUp {
+  0% {
+    top: calc(100% + 35px);
+    opacity: 0;
+  }
+
+  15% {
+    opacity: 0.85;
+  }
+
+  85% {
+    opacity: 0.85;
+  }
+
+  100% {
+    top: -35px;
+    opacity: 0;
+  }
+}
+
+/* Stagger the movement */
+
+.hero-light-line:nth-child(1)::after {
+  animation-delay: 0s;
+}
+.hero-light-line:nth-child(2)::after {
+  animation-delay: 0.6s;
+}
+.hero-light-line:nth-child(3)::after {
+  animation-delay: 1.2s;
+}
+.hero-light-line:nth-child(4)::after {
+  animation-delay: 1.8s;
+}
+.hero-light-line:nth-child(5)::after {
+  animation-delay: 2.4s;
+}
+.hero-light-line:nth-child(6)::after {
+  animation-delay: 3s;
+}
+.hero-light-line:nth-child(7)::after {
+  animation-delay: 3.6s;
+}
+.hero-light-line:nth-child(8)::after {
+  animation-delay: 4.2s;
+}
+.hero-light-line:nth-child(9)::after {
+  animation-delay: 4.8s;
+}
+
+/* =========================================
+   REDUCED MOTION ACCESSIBILITY
+========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-light-line::after {
+    animation: none !important;
+    opacity: 0;
+  }
+
+  .hero-quote-button,
+  .hero-quote-arrow {
+    transition: none;
+  }
+}
+
+/* SERVICES ICON - BLUE GLOW */
+.service-icon {
+  box-shadow:
+    0 0 8px rgba(22, 139, 232, 0.12),
+    inset 0 0 8px rgba(22, 139, 232, 0.04);
+}
+
+.service-icon:hover,
+.group:hover .service-icon {
+  border-color: #168be8;
+  box-shadow:
+    0 0 8px rgba(22, 139, 232, 0.35),
+    0 0 18px rgba(22, 139, 232, 0.2),
+    inset 0 0 10px rgba(22, 139, 232, 0.08);
 }
