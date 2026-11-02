@@ -133,7 +133,7 @@ const airConditioning = {
   },
 
   closing: {
-    image: "http://moderninvest.co.za/wp-content/uploads/2026/05/AIRCON.png",
+    image: "/images/aircondition-services.png",
 
     heading: "Aircon Experts",
 

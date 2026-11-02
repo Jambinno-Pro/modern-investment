@@ -89,8 +89,11 @@ function ContentRenderer({ data, depth = 0 }) {
   }
 
   if (isObject(data)) {
-    // Special layout for painting stages:
-    // Show the number by itself, without NUMBER or STAGE labels.
+    /* -----------------------------------------------------
+       PAINTING STAGES
+       Display the stage number without NUMBER or STAGE labels.
+    ----------------------------------------------------- */
+
     if (data.number && data.title && Array.isArray(data.instructions)) {
       return (
         <div className="space-y-5">
@@ -109,6 +112,28 @@ function ContentRenderer({ data, depth = 0 }) {
       );
     }
 
+    /* -----------------------------------------------------
+       CEILING TYPES
+       Display title, description and number only.
+       Never display the unwanted "Number" heading.
+    ----------------------------------------------------- */
+
+    if (data.number && data.title && data.description) {
+      return (
+        <div className="space-y-5">
+          <h3 className="text-xl font-extrabold leading-snug text-[#101B78]">
+            {data.title}
+          </h3>
+
+          <p className="text-[15px] leading-8 text-gray-600">
+            {data.description}
+          </p>
+
+          <p className="text-[15px] font-medium text-gray-500">{data.number}</p>
+        </div>
+      );
+    }
+
     const entries = Object.entries(data).filter(
       ([key, value]) =>
         value !== null &&
@@ -118,6 +143,7 @@ function ContentRenderer({ data, depth = 0 }) {
     );
 
     const heading = data.heading || data.title || data.label || data.name;
+
     const description = data.description;
 
     const remainingEntries = entries.filter(
@@ -151,6 +177,7 @@ function ContentRenderer({ data, depth = 0 }) {
                   <h4 className="mb-2 text-sm font-extrabold text-[#101B78]">
                     {formatLabel(key)}
                   </h4>
+
                   <ContentRenderer data={value} depth={depth + 1} />
                 </div>
               )}
@@ -293,7 +320,7 @@ function AirConditioningPage({ service }) {
         <div className="mx-auto w-full max-w-7xl px-5 py-20 sm:px-8">
           <Link
             href="/services"
-            className="mb-12 inline-flex items-center gap-2 text-sm font-bold text-white transition hover:text-[#F58200]"
+            className="mb-12 inline-flex items-center gap-2 text-sm font-bold !text-white transition duration-300 hover:!text-[#F58200]"
           >
             <ArrowLeft size={17} />
             Back to Our Services
@@ -336,7 +363,7 @@ function AirConditioningPage({ service }) {
         </div>
       </section>
 
-      {/* INTRODUCTION - ONLY IF PROVIDED */}
+      {/* INTRODUCTION */}
       {(introduction.heading || introduction.description) && (
         <section className="py-14 sm:py-16">
           <div className="mx-auto max-w-7xl px-5 sm:px-8">
@@ -351,7 +378,7 @@ function AirConditioningPage({ service }) {
         </section>
       )}
 
-      {/* 1. COMMON AIR-CONDITIONING TYPES */}
+      {/* COMMON AIR-CONDITIONING TYPES */}
       {service.airconTypes && (
         <section className="py-12 sm:py-14">
           <div className="mx-auto max-w-7xl px-5 sm:px-8">
@@ -370,12 +397,13 @@ function AirConditioningPage({ service }) {
         </section>
       )}
 
-      {/* 2. SIZING YOUR AC */}
+      {/* SIZING YOUR AC */}
       {service.sizing && (
         <section className="bg-[#F5F7FA] py-12 sm:py-14">
           <div className="mx-auto max-w-7xl px-5 sm:px-8">
             <h2 className="mb-5 text-2xl font-extrabold text-[#101B78] sm:text-3xl">
               {service.sizing.heading}
+
               {service.sizing.highlightedHeading && (
                 <span className="ml-2 text-[#F58200]">
                   {service.sizing.highlightedHeading}
@@ -396,7 +424,7 @@ function AirConditioningPage({ service }) {
         </section>
       )}
 
-      {/* 3. INSTALLATION FACTORS */}
+      {/* INSTALLATION FACTORS */}
       {service.installationFactors && (
         <section className="py-12 sm:py-14">
           <div className="mx-auto max-w-7xl px-5 sm:px-8">
@@ -433,6 +461,7 @@ function AirConditioningPage({ service }) {
               {closing.heading && (
                 <h2 className="mb-6 text-3xl font-extrabold leading-tight text-[#101B78] sm:text-4xl">
                   {closing.heading}
+
                   {closing.highlightedHeading && (
                     <span className="text-[#F58200]">
                       {" "}
@@ -481,6 +510,19 @@ function AirConditioningPage({ service }) {
 ========================================================= */
 
 function ServiceSection({ section }) {
+  // Remove heading, label and description because they are
+  // already displayed separately above the content.
+  const contentEntries = Object.entries(section.content || {}).filter(
+    ([key]) => !["label", "heading", "description"].includes(key),
+  );
+
+  // If there is only one content array (e.g. ceiling types),
+  // render the array directly to avoid unnecessary nested headings.
+  const content =
+    contentEntries.length === 1 && Array.isArray(contentEntries[0][1])
+      ? contentEntries[0][1]
+      : Object.fromEntries(contentEntries);
+
   return (
     <section className="py-16 sm:py-20">
       <div className="mx-auto max-w-7xl px-5 sm:px-8">
@@ -502,11 +544,15 @@ function ServiceSection({ section }) {
           </p>
         )}
 
-        <ContentRenderer data={section.content} />
+        <ContentRenderer data={content} />
       </div>
     </section>
   );
 }
+
+/* =========================================================
+   SERVICE NOT FOUND
+========================================================= */
 
 function ServiceNotFound() {
   return (
@@ -531,6 +577,10 @@ function ServiceNotFound() {
     </main>
   );
 }
+
+/* =========================================================
+   LOADING FALLBACK
+========================================================= */
 
 function ServicePageFallback() {
   return (
@@ -745,7 +795,10 @@ async function ServicePageContent({ params }) {
   );
 }
 
-// Next.js 16: keep params access inside Suspense.
+/* =========================================================
+   NEXT.JS 16 PAGE EXPORT
+========================================================= */
+
 export default function ServicePage({ params }) {
   return (
     <Suspense fallback={<ServicePageFallback />}>

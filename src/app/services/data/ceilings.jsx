@@ -18,12 +18,6 @@ const ceilings = {
     link: "/contact/",
   },
 
-  introduction: {
-    heading: "About Modern Investments",
-    description:
-      "Ceiling types are generally classified by their architectural shape (how they are built) and the materials used to finish them.",
-  },
-
   architecturalTypes: {
     label: "COMMON ARCHITECTURAL CEILING TYPES",
     heading: "Explore Different Ceiling Designs",
