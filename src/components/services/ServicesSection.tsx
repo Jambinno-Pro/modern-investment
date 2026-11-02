@@ -77,7 +77,7 @@ const services = [
       "Ceiling installations featuring a variety of architectural designs and finishes.",
     description:
       "The right ceiling design can enhance the overall appearance of an interior. We provide ceiling installation services with a variety of architectural ceiling designs and finishes to complement your space.",
-    image: "/hero/ceiling1.jfif",
+    image: "/hero/ceiling-service.png",
     imageAlt: "Modern ceiling installation",
     icon: PanelsTopLeft,
     features: [
