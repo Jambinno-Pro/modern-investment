@@ -15,9 +15,17 @@ const manrope = Manrope({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://moderninvest.co.za"),
+
   title: "Modern Investments | Quality Craftsmanship & Professional Services",
+
   description:
     "Modern Investments offers professional painting, carpentry, renovations, ceiling installations, custom kitchens and wardrobes, and air-conditioning services.",
+
+  icons: {
+    icon: [{ url: "/favicon.png", type: "image/png" }],
+    shortcut: "/favicon.png",
+    apple: "/favicon.png",
+  },
 };
 
 export default function RootLayout({
