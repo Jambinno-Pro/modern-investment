@@ -7,27 +7,27 @@ import { Phone, Mail, MapPin, ArrowUpRight, Clock3 } from "lucide-react";
 
 const galleryImages = [
   {
-    src: "https://moderninvest.co.za/wp-content/uploads/2026/05/fst-slide-150x150.png",
+    src: "hero/air-conditioning1.png",
     alt: "Modern Investments project",
   },
   {
-    src: "https://moderninvest.co.za/wp-content/uploads/2026/05/IMG-20260421-WA0063-1-150x150.jpg",
+    src: "hero/ceiling.png",
     alt: "Modern Investments project",
   },
   {
-    src: "https://moderninvest.co.za/wp-content/uploads/2026/05/IMG-20260421-WA0065-1-150x150.jpg",
+    src: "hero/ceiling-service.png",
     alt: "Modern Investments project",
   },
   {
-    src: "https://moderninvest.co.za/wp-content/uploads/2026/05/IMG-20260421-WA0064-1-150x150.jpg",
+    src: "hero/painting.png",
     alt: "Modern Investments project",
   },
   {
-    src: "https://moderninvest.co.za/wp-content/uploads/2026/05/IMG-20260421-WA0067-1-150x150.jpg",
+    src: "hero/woodwork.png",
     alt: "Modern Investments project",
   },
   {
-    src: "https://moderninvest.co.za/wp-content/uploads/2026/05/IMG-20260421-WA0066-1-150x150.jpg",
+    src: "hero/painting1.png",
     alt: "Modern Investments project",
   },
 ];
@@ -58,11 +58,10 @@ export default function SiteFooter() {
             className="inline-block"
           >
             <Image
-              src="https://moderninvest.co.za/wp-content/uploads/2026/05/logo-white-300x296.png"
+              src="/images/logowhite.png"
               alt="Modern Investments"
               width={140}
               height={140}
-              unoptimized
               className="h-auto w-28 object-contain"
             />
           </Link>
